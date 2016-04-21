@@ -1,10 +1,11 @@
+from time import sleep
+
 from behave import given, when, then
-from selenium import webdriver
+from hamcrest import assert_that, is_
 
 
 @given(u'I open wordpress')
 def step_impl(context):
-    context.driver = webdriver.Firefox()
     context.driver.get("http://qinyu-my-wordpress.daoapp.io")
 
 
@@ -16,4 +17,21 @@ def step_impl(context):
 @then(u'I can see login page')
 def step_impl(context):
     assert context.driver.find_element_by_partial_link_text("Lost your password?") is not None
-    context.driver.quit()
+
+
+@when(u'I login with credential "{user}" and "{password}"')
+def step_impl(context, user, password):
+    context.driver.find_element_by_id('user_login').send_keys(user)
+    if password != "N/A":
+        context.driver.find_element_by_id('user_pass').send_keys(password)
+    context.driver.find_element_by_id('wp-submit').click()
+
+
+@then(u'I can login successful')
+def step_impl(context):
+    assert context.driver.current_url == 'http://qinyu-my-wordpress.daoapp.io/wp-admin/'
+
+
+@then(u'I should see error message "{error}"')
+def step_impl(context, error):
+    assert context.driver.find_element_by_id('login_error').text == error
