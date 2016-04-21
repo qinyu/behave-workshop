@@ -9,7 +9,7 @@ Feature: Wordpress Lover
     When I click "login"
     Then I can see login page
 
-
+  @success
   Scenario: allow login with valid credential
     Given I open wordpress
     When I click "login"
@@ -17,7 +17,7 @@ Feature: Wordpress Lover
     When I login with credential "admin" and "123456"
     Then I can login successful
 
-  @wip
+  @fail
   Scenario Outline: allow login with invalid credential
     When I login with credential "<user>" and "<password>"
     Then I should see error message "<error>"
