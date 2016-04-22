@@ -1,7 +1,6 @@
-from time import sleep
-
 from behave import given, when, then
-from hamcrest import assert_that, is_
+
+from features.pages import LoginPage
 
 
 @given(u'I open wordpress')
@@ -21,10 +20,11 @@ def step_impl(context):
 
 @when(u'I login with credential "{user}" and "{password}"')
 def step_impl(context, user, password):
-    context.driver.find_element_by_id('user_login').send_keys(user)
-    if password != "N/A":
-        context.driver.find_element_by_id('user_pass').send_keys(password)
-    context.driver.find_element_by_id('wp-submit').click()
+    LoginPage(context.driver).login_with_credential(user, password)
+    # context.driver.find_element_by_id('user_login').send_keys(user)
+    # if password != "N/A":
+    #     context.driver.find_element_by_id('user_pass').send_keys(password)
+    # context.driver.find_element_by_id('wp-submit').click()
 
 
 @then(u'I can login successful')
@@ -34,4 +34,5 @@ def step_impl(context):
 
 @then(u'I should see error message "{error}"')
 def step_impl(context, error):
-    assert context.driver.find_element_by_id('login_error').text == error
+    # assert context.driver.find_element_by_id('login_error').text == error
+    assert LoginPage(context.driver).get_login_error() == error
