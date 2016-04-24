@@ -9,11 +9,8 @@ Feature: Wordpress Lover
     When I click "login"
     Then I can see login page
 
-  @success
+  @success @wip
   Scenario: allow login with valid credential
-    Given I open wordpress
-    When I click "login"
-    Then I can see login page
     When I login with credential "admin" and "123456"
     Then I can login successful
 

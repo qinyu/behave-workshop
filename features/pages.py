@@ -14,7 +14,7 @@ class LoginPage:
         self.driver.find_element(*self.USER_INPUT).send_keys(user)
         if password != "N/A":
             self.driver.find_element(*self.PASSWORD_INPUT).send_keys(password)
-            self.driver.find_element(*self.SUBMIT_INPUT).click()
+        self.driver.find_element(*self.SUBMIT_INPUT).click()
 
     def get_login_error(self):
         return self.driver.find_element(*self.ERROR_DIV).text
