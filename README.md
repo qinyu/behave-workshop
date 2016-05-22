@@ -20,3 +20,10 @@ Code of behave workshop
 
 ### 浏览器
 Firefox，下载地址：https://www.mozilla.org/en-US/firefox/new/
+
+### Behave教程：
+http://behave.github.io/behave.example/
+
+### Selenium教程：
+http://selenium-python.readthedocs.io/
+http://elementalselenium.com/tips
