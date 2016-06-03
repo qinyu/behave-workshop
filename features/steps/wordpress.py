@@ -1,4 +1,7 @@
+from time import sleep
+
 from behave import given, when, then
+from selenium.webdriver.support.wait import WebDriverWait
 
 from features.pages import LoginPage
 
@@ -10,6 +13,8 @@ def step_impl(context):
 
 @when(u'I click "login"')
 def step_impl(context):
+    if context.config.userdata.get("platform", "firefox") == 'android_chrome':
+        context.driver.find_element_by_css_selector("button.secondary-toggle").click()
     context.driver.find_element_by_partial_link_text("Log in").click()
 
 
@@ -29,7 +34,8 @@ def step_impl(context, user, password):
 
 @then(u'I can login successful')
 def step_impl(context):
-    assert context.driver.current_url == 'http://qinyu-my-wordpress.daoapp.io/wp-admin/'
+    WebDriverWait(context.driver, 10).until(
+        lambda driver: driver.current_url == 'http://qinyu-my-wordpress.daoapp.io/wp-admin/')
 
 
 @then(u'I should see error message "{error}"')
