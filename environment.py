@@ -4,7 +4,8 @@ from selenium import webdriver
 
 
 def before_scenario(context, scenario):
-    if context.config.userdata.get("platform", "firefox") == 'android_chrome':
+    platform = context.config.userdata.get("platform", "firefox")
+    if platform == 'android_chrome':
         caps = {
             'platformName': 'Android',
             'platformVersion': '6.0.1',
@@ -12,8 +13,11 @@ def before_scenario(context, scenario):
             'browserName': 'Chrome'
         }
         context.driver = webdriver.Remote('http://localhost:4723/wd/hub', caps)
-    else:
+    elif platform == 'firefox':
         context.driver = webdriver.Firefox(executable_path=os.path.join(os.getcwd(), 'geckodriver'))
+        context.driver.maximize_window()
+    else:
+        context.driver = webdriver.Chrome(executable_path=os.path.join(os.getcwd(), 'chromedriver'))
         context.driver.maximize_window()
 
 

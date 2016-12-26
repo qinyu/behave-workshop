@@ -1,3 +1,3 @@
 from behave import __main__
 
-__main__.main('-w')
+__main__.main()
