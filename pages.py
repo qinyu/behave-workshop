@@ -1,4 +1,6 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.expected_conditions import visibility_of_element_located
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class LoginPage:
@@ -17,4 +19,5 @@ class LoginPage:
         self.driver.find_element(*self.SUBMIT_INPUT).click()
 
     def get_login_error(self):
+        WebDriverWait(self.driver, 10).until(visibility_of_element_located(self.ERROR_DIV))
         return self.driver.find_element(*self.ERROR_DIV).text

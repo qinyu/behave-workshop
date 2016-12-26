@@ -1,0 +1,7 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "python.pythonPath": "${workspaceRoot}/venv/bin/python",
+    "files.autoSave": "afterDelay",
+    "editor.fontSize": 14,
+    "editor.renderWhitespace": "all"
+}

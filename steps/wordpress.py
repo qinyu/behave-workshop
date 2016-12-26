@@ -1,9 +1,12 @@
 from time import sleep
 
 from behave import given, when, then
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.expected_conditions import visibility_of_element_located
 from selenium.webdriver.support.wait import WebDriverWait
 
-from features.pages import LoginPage
+from pages import LoginPage
 
 
 @given(u'I open wordpress')
@@ -20,6 +23,7 @@ def step_impl(context):
 
 @then(u'I can see login page')
 def step_impl(context):
+    WebDriverWait(context.driver, 20).until(visibility_of_element_located((By.PARTIAL_LINK_TEXT, "Lost your password?")))
     assert context.driver.find_element_by_partial_link_text("Lost your password?") is not None
 
 
@@ -34,7 +38,7 @@ def step_impl(context, user, password):
 
 @then(u'I can login successful')
 def step_impl(context):
-    WebDriverWait(context.driver, 10).until(
+    WebDriverWait(context.driver, 20).until(
         lambda driver: driver.current_url == 'http://qinyu-my-wordpress.daoapp.io/wp-admin/')
 
 
