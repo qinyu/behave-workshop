@@ -1,8 +1,5 @@
-from time import sleep
-
 from behave import given, when, then
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.expected_conditions import visibility_of_element_located
 from selenium.webdriver.support.wait import WebDriverWait
 
@@ -11,7 +8,7 @@ from pages import LoginPage
 
 @given(u'I open wordpress')
 def step_impl(context):
-    context.driver.get("http://qinyu-my-wordpress.daoapp.io")
+    context.driver.get("http://mywp-1-qinyu.tenxapp.com")
 
 
 @when(u'I click "login"')
@@ -39,7 +36,7 @@ def step_impl(context, user, password):
 @then(u'I can login successful')
 def step_impl(context):
     WebDriverWait(context.driver, 20).until(
-        lambda driver: driver.current_url == 'http://qinyu-my-wordpress.daoapp.io/wp-admin/')
+        lambda driver: driver.current_url == 'http://mywp-1-qinyu.tenxapp.com/wp-admin/')
 
 
 @then(u'I should see error message "{error}"')
